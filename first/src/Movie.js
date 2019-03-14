@@ -5,11 +5,21 @@ import React from 'react';
 import propTypes from 'prop-types';
 import './Movie.css';
 
-    function Movie ({title, poster}){
+    function Movie ({title, poster, genres, synopsis }){
         return (
-            <div>
-                <MoviePoster poster={poster}/>
-                <h1>{title}</h1>
+            <div className="Movie">
+                <div className="Movie_Colums">
+                    <MoviePoster poster={poster} alt={title}/>
+                </div>
+                <div className="Movie_Colums">
+                    <h1>{title}</h1>
+                    <div className="Movie_Genres">
+                        {genres.map((genre, index) => <MovieGenre genre={genre} key={index}/> )}
+                    </div>
+                    <p className="Movie_synopsis">
+                        {synopsis}
+                    </p>
+                </div>
             </div>
         )
     }
@@ -27,22 +37,33 @@ import './Movie.css';
 // }
 
 // return 만 필요한 간단한 컴포넌트의 경우 class 컴포넌트가 아닌 function 컴포넌트로 지정해준다 
-    function MoviePoster({poster}){
+    function MoviePoster({poster, alt}){
         return (
-            <img src={poster} alt="Movie Poster"/>
+            <img src={poster} className="Movie_Poster" alt={alt} title={alt} />
         )
     }
-
+    function MovieGenre({genres}){
+        return (
+            <span className="Movie_Genre">{genres}</span>
+        )
+    }
 
     ///////////////////////////////////////////////////////////////////
     Movie.propTypes = {
         title : propTypes.string.isRequired,
-        poster : propTypes.string.isRequired
+        poster : propTypes.string.isRequired,
+        genres : propTypes.array.isRequired,
+        synopsis : propTypes.string.isRequired
         //해당 컴포넌트에 등장하는 props에 대해 지정해주도록 하자 
     }
 
     MoviePoster.propTypes = {
-        poster : propTypes.string.isRequired
+        poster : propTypes.string.isRequired,
+        alt : propTypes.string.isRequired
+    }
+    
+    MovieGenre.propTypes = {
+        genres : propTypes.array.isRequired
     }
 
 // class Movie extends Component{

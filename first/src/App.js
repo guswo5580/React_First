@@ -28,7 +28,12 @@ class App extends Component {
     }
     _renderMovies = () => {
         const movies = this.state.movies.map(movie => {
-            return <Movie title={movie.title} poster={movie.large_cover_image} key={movie.id} />
+            return <Movie 
+            title={movie.title_english} 
+            poster={movie.medium_cover_image} 
+            genres={movie.genres}
+            synopsis={movie.synopsis} 
+            key={movie.id} />
         })
         return movies 
         //함수를 통해 무비 리스트를 나열할 수 있도록 정의
