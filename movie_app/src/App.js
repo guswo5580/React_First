@@ -1,12 +1,16 @@
-import React, { Component } from "react";
+import React, { Component } from "react"; 
 import "./App.css";
 import Movie from "./Movie";
 
 class App extends Component {
   // Render: componentWillMount() -> render() -> componentDidMount()
   // Update componentWillReceiveProps() -> shouldComponentUpdate() -> componentWillUpdate() -> render() -> componentDidUpdate()
+  constructor(props){
+    super(props);
+    this.state = {
 
-  state = {};
+    };
+  }
 
   componentDidMount() {
     this._getMovies();
@@ -38,7 +42,7 @@ class App extends Component {
     return fetch(
       "https://yts.am/api/v2/list_movies.json?sort_by=download_count"
     )
-      .then(potato => potato.json())
+      .then(res => res.json())
       .then(json => json.data.movies)
       .catch(err => console.log(err));
   };
